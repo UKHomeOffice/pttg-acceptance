@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url "https://github.com/UKHomeOffice/pttg-gradle-repo/raw/master/releases" }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+
+        classpath 'pttg-gradle-common:pttgCommonGradle:1.4.RELEASE'
+        classpath 'pttg-gradle-common:pttgSpringBootGradle:1.2.RELEASE'
+
+        classpath 'net.serenity-bdd:serenity-gradle-plugin:1.1.31'
+
+        classpath "com.moowork.gradle:gradle-node-plugin:0.12"
+        classpath "com.moowork.gradle:gradle-gulp-plugin:0.12"
+    }
+}
+
+apply plugin: 'pttgCommonGradle'
+apply plugin: 'pttgSpringBootGradle'
+apply plugin: 'net.serenity-bdd.aggregator'
+apply plugin: 'com.moowork.gulp'
+
+group 'pttg-acceptance'
+version '1.0-SNAPSHOT'
+
+dependencies {
+
+    testCompile libraries.cucumber
+    testCompile libraries.groovy
+    testCompile libraries.jackson
+    testCompile libraries.jersey
+    testCompile libraries.json
+    testCompile libraries.logging
+    testCompile libraries.restassured
+    testCompile libraries.spock
+    testCompile libraries.springTest
+    testCompile libraries.testUtils
+
+
+}
+
+task acceptanceTest(type: Test) {
+    description 'Runs the acceptance tests.'
+    group 'verification'
+    include 'acceptance/**'
+    finalizedBy aggregate
+    outputs.upToDateWhen {false}
+}
