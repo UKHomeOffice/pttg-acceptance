@@ -63,9 +63,7 @@ class IncomeProvingSteps {
 
     @When("^the (?:generic|family) income check is performed with\$")
     def generic_income_check_performed(DataTable arg1) {
-
         Map<String, String> entries = arg1.asMap(String.class, String.class)
-
         submitEntries(entries)
     }
 

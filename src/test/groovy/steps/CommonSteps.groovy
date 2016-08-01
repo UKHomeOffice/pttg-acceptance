@@ -62,7 +62,6 @@ class CommonSteps {
         utils.assertTextFieldEqualityForMap(['page sub heading': pageSubHeading])
     }
 
-
     @Then("^the service displays the following page content\$")
     def the_service_displays_the_following_page_content(DataTable expectedResult) throws Throwable {
         utils.assertTextFieldEqualityForTable(expectedResult)

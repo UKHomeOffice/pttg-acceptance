@@ -43,7 +43,6 @@ class FinancialStatusSteps {
             'doctorateQuery'    : fsUiRoot + '#/financial-status-query-doctorate',
             'non-doctorateQuery': fsUiRoot + '#/financial-status-query-non-doctorate'
         ]
-
     }
 
 
@@ -148,12 +147,5 @@ class FinancialStatusSteps {
     def the_financial_status_check_is_performed_with(DataTable arg1) throws Throwable {
         Map<String, String> entries = arg1.asMap(String.class, String.class)
         submitEntries(entries)
-    }
-
-
-    @Then("^the health check response status should be (\\d+)\$")
-    def the_health_check_response_status_should_be(int expected) {
-        sleep(800) // Seems to need a delay to let wiremock catch up
-        assert Utils.responseStatusFor(fsUiRoot + "health") == expected
     }
 }

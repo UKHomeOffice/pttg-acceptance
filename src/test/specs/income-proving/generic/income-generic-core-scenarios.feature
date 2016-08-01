@@ -36,7 +36,6 @@ Feature: Income Proving - generic tool - core use case scenarios
             | The to date is invalid                   |
 
     Scenario: Caseworker enters a NINO where no records exist within the period stated
-        Given Robert is using the IPS Generic Tool
         When the generic income check is performed with
             | NINO      | KR123456C  |
             | From Date | 01/04/2015 |

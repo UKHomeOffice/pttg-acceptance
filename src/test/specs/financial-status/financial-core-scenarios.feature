@@ -18,12 +18,12 @@ Feature: Financial Status core use case scenarios
             | Account number                  | 77777777   |
         Then the service displays the following result
             | Outcome                         | Not passed               |
-            | Total funds required            | £16,090.00               |
+            | Total funds required            | £17,355.00               |
             | Maintenance period checked      | 03/05/2016 to 30/05/2016 |
             | Course dates checked            | 30/05/2016 to 30/11/2016 |
             | Student type                    | Tier 4 (General) student |
             | In London                       | Yes                      |
-            | Course length                   | 6                        |
+            | Course length                   | 7                        |
             | Total tuition fees              | £8,500.00                |
             | Tuition fees already paid       | £0.00                    |
             | Accommodation fees already paid | £0.00                    |
@@ -52,7 +52,7 @@ Feature: Financial Status core use case scenarios
             | Course dates checked            | 30/05/2016 to 30/07/2016                              |
             | Student type                    | Tier 4 (General) student (doctorate extension scheme) |
             | In London                       | Yes                                                   |
-            | Course length                   | 2                                                     |
+            | Course length                   | 3                                                     |
             | Accommodation fees already paid | £0.00                                                 |
             | Sort code                       | 11-11-12                                              |
             | Account number                  | 11111112                                              |
@@ -116,7 +116,7 @@ Feature: Financial Status core use case scenarios
             | End date                        | 30/05/2016 |
             | In London                       | No         |
             | Course start date               | 30/05/2016 |
-            | Course end date                 | 30/07/2016 |
+            | Course end date                 | 29/07/2016 |
             | Total tuition fees              | 3000.00    |
             | Number of dependants            | 0          |
             | Tuition fees already paid       | 0          |
@@ -127,7 +127,7 @@ Feature: Financial Status core use case scenarios
             | Outcome                         | Not passed               |
             | Total funds required            | £5,030.00                |
             | Maintenance period checked      | 03/05/2016 to 30/05/2016 |
-            | Course dates checked            | 30/05/2016 to 30/07/2016 |
+            | Course dates checked            | 30/05/2016 to 29/07/2016 |
             | In London                       | No                       |
             | Course length                   | 2                        |
             | Total tuition fees              | £3,000.00                |
