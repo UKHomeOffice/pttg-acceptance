@@ -3,7 +3,7 @@ Feature: Income Proving - family tool - core use case scenarios
     Background:
         Given caseworker is using the IPS Family Tool
 
-    Scenario: Shelly does not meet the Category A Financial Requirement (She has earned < the Cat A financial threshold)
+    Scenario: Does not meet Cat A Financial Requirement (earned < the Cat A threshold)
     Pay date 15th of the month
     Before day of Application Raised Date
     She has 4 Canadian dependants

@@ -3,7 +3,7 @@ Feature: Income Proving - generic tool - core use case scenarios
     Background:
         Given caseworker is using the IPS Generic Tool
 
-    Scenario: Robert obtains NINO income details to understand how much they have earned within 6 months (single job)
+    Scenario: View income details
         When the generic income check is performed with
             | NINO      | QQ123456A  |
             | From Date | 01/01/2015 |
