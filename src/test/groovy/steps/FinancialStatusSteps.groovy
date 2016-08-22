@@ -32,16 +32,16 @@ class FinancialStatusSteps {
         utils = new Utils(driver)
 
         utils.pageLocations = [
-            'studentType'       : '#/financial-status-student-type',
-            'doctorateQuery'    : '#/financial-status-query-doctorate',
-            'non-doctorateQuery': '#/financial-status-query-non-doctorate',
-            'accountNotFound'   : '#/financial-status-no-record'
+                'studentType'       : '#/financial-status-student-type',
+                'doctorateQuery'    : '#/financial-status-query-doctorate',
+                'non-doctorateQuery': '#/financial-status-query-non-doctorate',
+                'accountNotFound'   : '#/financial-status-no-record'
         ]
 
         utils.pageUrls = [
-            'studentType'       : fsUiRoot,
-            'doctorateQuery'    : fsUiRoot + '#/financial-status-query-doctorate',
-            'non-doctorateQuery': fsUiRoot + '#/financial-status-query-non-doctorate'
+                'studentType'       : fsUiRoot,
+                'doctorateQuery'    : fsUiRoot + '#/financial-status-query-doctorate',
+                'non-doctorateQuery': fsUiRoot + '#/financial-status-query-non-doctorate'
         ]
     }
 
@@ -53,12 +53,12 @@ class FinancialStatusSteps {
     def dateDelimiter = "/"
 
     def inLondonRadio = new Utils.RadioButtonConfig()
-        .withOption('yes', 'inLondon-1')
-        .withOption('no', 'inLondon-2')
+            .withOption('yes', 'inLondon-1')
+            .withOption('no', 'inLondon-2')
 
     def studentTypeRadio = new Utils.RadioButtonConfig()
-        .withOption('non-doctorate', 'studentType-1')
-        .withOption('doctorate', 'studentType-2')
+            .withOption('non-doctorate', 'studentType-1')
+            .withOption('doctorate', 'studentType-2')
 
     def studentType
 
@@ -67,7 +67,10 @@ class FinancialStatusSteps {
         entries.each { k, v ->
             String key = Utils.toCamelCase(k)
 
-            if (key.endsWith("Date")) {
+            if (key.endsWith("dob")) {
+                utils.fillOrClearBySplitting(key, v, dateParts, dateDelimiter)
+
+            } else if (key.endsWith("Date")) {
                 utils.fillOrClearBySplitting(key, v, dateParts, dateDelimiter)
 
             } else if (key == "sortCode") {
@@ -125,14 +128,14 @@ class FinancialStatusSteps {
     def the_financial_status_check_is_performed() throws Throwable {
 
         Map<String, String> validDefaultEntries = [
-            'End date'                       : '30/05/2016',
-            'In London'                      : 'Yes',
-            'Course start date'              : '30/05/2016',
-            'Course end date'                : '30/06/2016',
-            'Accommodation fees already paid': '0',
-            'Number of dependants'           : '1',
-            'Sort code'                      : '11-11-11',
-            'Account number'                 : '11111111',
+                'End date'                       : '30/05/2016',
+                'In London'                      : 'Yes',
+                'Course start date'              : '30/05/2016',
+                'Course end date'                : '30/06/2016',
+                'Accommodation fees already paid': '0',
+                'Number of dependants'           : '1',
+                'Sort code'                      : '11-11-11',
+                'Account number'                 : '11111111',
         ]
 
         if (studentType.equalsIgnoreCase('non-doctorate')) {
