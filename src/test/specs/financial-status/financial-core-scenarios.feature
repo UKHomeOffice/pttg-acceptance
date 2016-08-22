@@ -14,7 +14,7 @@ Feature: Financial Status core use case scenarios
             | Number of dependants            | 0          |
             | Sort code                       | 11-11-11   |
             | Account number                  | 77777777   |
-            | dob                             | 01/01/2012 |
+            | dob                             | 01/01/1996 |
         Then the service displays the following result
             | Outcome                         | Not passed               |
             | Total funds required            | £17,355.00               |
@@ -28,7 +28,7 @@ Feature: Financial Status core use case scenarios
             | Accommodation fees already paid | £0.00                    |
             | Sort code                       | 11-11-11                 |
             | Account number                  | 77777777                 |
-            | dob                             | 01/01/2012               |
+            | dob                             | 01/01/1996               |
 
     Scenario: Non-doctorate, not in London, sufficient funds
         Given caseworker is using the financial status service ui
@@ -44,6 +44,7 @@ Feature: Financial Status core use case scenarios
             | Accommodation fees already paid | 1200       |
             | Sort code                       | 44-44-44   |
             | Account number                  | 13131313   |
+            | dob                             | 01/01/1996 |
         Then the service displays the following result
             | Outcome                    | Passed                   |
             | Total funds required       | £23,335.00               |
@@ -51,6 +52,7 @@ Feature: Financial Status core use case scenarios
             | Course dates checked       | 30/05/2016 to 28/02/2017 |
             | Sort code                  | 44-44-44                 |
             | Account number             | 13131313                 |
+            | dob                        | 01/01/1996               |
 
     Scenario: Doctorate, in London, insufficient funds
         Given caseworker is using the financial status service ui
@@ -58,23 +60,21 @@ Feature: Financial Status core use case scenarios
         When the financial status check is performed with
             | End date                        | 30/05/2016 |
             | In London                       | Yes        |
-            | Course start date               | 30/05/2016 |
-            | Course end date                 | 30/07/2016 |
             | Accommodation fees already paid | 0          |
             | Number of dependants            | 0          |
             | Sort code                       | 11-11-12   |
             | Account number                  | 11111112   |
+            | dob                             | 01/01/1996 |
         Then the service displays the following result
             | Outcome                         | Not passed                                            |
             | Total funds required            | £2,530.00                                             |
             | Maintenance period checked      | 03/05/2016 to 30/05/2016                              |
-            | Course dates checked            | 30/05/2016 to 30/07/2016                              |
             | Student type                    | Tier 4 (General) student (doctorate extension scheme) |
             | In London                       | Yes                                                   |
-            | Course length                   | 3                                                     |
             | Accommodation fees already paid | £0.00                                                 |
             | Sort code                       | 11-11-12                                              |
             | Account number                  | 11111112                                              |
+            | dob                             | 01/01/1996                                            |
 
     Scenario: Doctorate, in London, sufficient funds
     balance in her account is >= than the Total funds required - at £2279.50)
@@ -84,19 +84,18 @@ Feature: Financial Status core use case scenarios
         When the financial status check is performed with
             | End date                        | 30/05/2016 |
             | In London                       | Yes        |
-            | Course start date               | 30/05/2016 |
-            | Course end date                 | 30/07/2016 |
             | Number of dependants            | 0          |
             | Accommodation fees already paid | 250.50     |
             | Sort code                       | 22-22-23   |
             | Account number                  | 88888889   |
+            | dob                             | 01/01/1996 |
         Then the service displays the following result
             | Outcome                    | Passed                                                |
             | Total funds required       | £2,279.50                                             |
             | Maintenance period checked | 03/05/2016 to 30/05/2016                              |
-            | Course dates checked       | 30/05/2016 to 30/07/2016                              |
             | Student type               | Tier 4 (General) student (doctorate extension scheme) |
             | Sort code                  | 22-22-23                                              |
             | Account number             | 88888889                                              |
+            | dob                        | 01/01/1996                                            |
 
 
