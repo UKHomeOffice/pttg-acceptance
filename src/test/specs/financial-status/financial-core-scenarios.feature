@@ -14,7 +14,7 @@ Feature: Financial Status core use case scenarios
             | Number of dependants            | 0          |
             | Sort code                       | 11-11-11   |
             | Account number                  | 77777777   |
-            | DOB                             | 01/01/1996 |
+            | dob                             | 01/01/1996 |
         Then the service displays the following result
             | Outcome                         | Not passed               |
             | Total funds required            | £17,355.00               |
@@ -97,5 +97,47 @@ Feature: Financial Status core use case scenarios
             | Sort code                  | 22-22-23                                              |
             | Account number             | 88888889                                              |
             | DOB                        | 01/01/1996                                            |
+
+
+    Scenario: No records exist within the period stated
+        Given caseworker is using the financial status service ui
+        And the doctorate student type is chosen
+        When the financial status check is performed with
+            | End date                        | 10/06/2016 |
+            | In London                       | No         |
+            | Accommodation fees already paid | 0          |
+            | Number of dependants            | 0          |
+            | Sort code                       | 99-99-99   |
+            | Account number                  | 99999999   |
+            | DOB                             | 27/05/1986 |
+        Then the service displays the following page content
+            | Page dynamic heading | There is no record for the sort code and account number with Barclays                                                           |
+            | Page Dynamic detail  | We couldn't perform the financial requirement check as no information exists for sort code 99-99-99 and account number 99999999 |
+        And the service displays the following your search data
+            | Sort Code      | 99-99-99   |
+            | Account Number | 99999999   |
+            | DOB            | 27/05/1986 |
+
+
+    Scenario: Not enough records found
+        Given caseworker is using the financial status service ui
+        And the doctorate student type is chosen
+        #Given the account does not have sufficient records
+        When the financial status check is performed with
+            | End date                        | 10/06/2016 |
+            | In London                       | No         |
+            | Accommodation fees already paid | 0          |
+            | Number of dependants            | 0          |
+            | Sort code                       | 11-11-11   |
+            | Account number                  | 11111111   |
+            | DOB                             | 27/05/1986 |
+        Then the service displays the following page content
+            | Page dynamic heading | Not passed |
+            | Page Dynamic detail  | This account has been open for less than 28 days |
+        And the service displays the following your search data
+            | Sort Code      | 11-11-11   |
+            | Account Number | 11111111   |
+            | DOB            | 27/05/1986 |
+
 
 
