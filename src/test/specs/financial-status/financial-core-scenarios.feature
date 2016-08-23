@@ -1,6 +1,6 @@
 Feature: Financial Status core use case scenarios
 
-    Scenario: Non-doctorate, in London, insufficent funds
+    Scenario: Non-doctorate, in London, insufficient funds
         Given caseworker is using the financial status service ui
         And the non-doctorate student type is chosen
         When the financial status check is performed with
