@@ -14,7 +14,7 @@ Feature: Financial Status core use case scenarios
             | Number of dependants            | 0          |
             | Sort code                       | 11-11-11   |
             | Account number                  | 77777777   |
-            | dob                             | 01/01/1996 |
+            | DOB                             | 01/01/1996 |
         Then the service displays the following result
             | Outcome                         | Not passed               |
             | Total funds required            | £17,355.00               |
@@ -28,7 +28,7 @@ Feature: Financial Status core use case scenarios
             | Accommodation fees already paid | £0.00                    |
             | Sort code                       | 11-11-11                 |
             | Account number                  | 77777777                 |
-            | dob                             | 01/01/1996               |
+            | DOB                             | 01/01/1996               |
 
     Scenario: Non-doctorate, not in London, sufficient funds
         Given caseworker is using the financial status service ui

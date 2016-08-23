@@ -67,10 +67,7 @@ class FinancialStatusSteps {
         entries.each { k, v ->
             String key = Utils.toCamelCase(k)
 
-            if (key.endsWith("dob")) {
-                utils.fillOrClearBySplitting(key, v, dateParts, dateDelimiter)
-
-            } else if (key.endsWith("Date")) {
+            if (key.endsWith("Date") || (key == "dob")) {
                 utils.fillOrClearBySplitting(key, v, dateParts, dateDelimiter)
 
             } else if (key == "sortCode") {
