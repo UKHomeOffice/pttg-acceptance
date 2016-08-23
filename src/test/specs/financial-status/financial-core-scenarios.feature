@@ -44,7 +44,7 @@ Feature: Financial Status core use case scenarios
             | Accommodation fees already paid | 1200       |
             | Sort code                       | 44-44-44   |
             | Account number                  | 13131313   |
-            | dob                             | 01/01/1996 |
+            | DOB                             | 01/01/1996 |
         Then the service displays the following result
             | Outcome                    | Passed                   |
             | Total funds required       | £23,335.00               |
@@ -52,7 +52,7 @@ Feature: Financial Status core use case scenarios
             | Course dates checked       | 30/05/2016 to 28/02/2017 |
             | Sort code                  | 44-44-44                 |
             | Account number             | 13131313                 |
-            | dob                        | 01/01/1996               |
+            | DOB                        | 01/01/1996               |
 
     Scenario: Doctorate, in London, insufficient funds
         Given caseworker is using the financial status service ui
@@ -64,7 +64,7 @@ Feature: Financial Status core use case scenarios
             | Number of dependants            | 0          |
             | Sort code                       | 11-11-12   |
             | Account number                  | 11111112   |
-            | dob                             | 01/01/1996 |
+            | DOB                             | 01/01/1996 |
         Then the service displays the following result
             | Outcome                         | Not passed                                            |
             | Total funds required            | £2,530.00                                             |
@@ -74,7 +74,7 @@ Feature: Financial Status core use case scenarios
             | Accommodation fees already paid | £0.00                                                 |
             | Sort code                       | 11-11-12                                              |
             | Account number                  | 11111112                                              |
-            | dob                             | 01/01/1996                                            |
+            | DOB                             | 01/01/1996                                            |
 
     Scenario: Doctorate, in London, sufficient funds
     balance in her account is >= than the Total funds required - at £2279.50)
@@ -88,7 +88,7 @@ Feature: Financial Status core use case scenarios
             | Accommodation fees already paid | 250.50     |
             | Sort code                       | 22-22-23   |
             | Account number                  | 88888889   |
-            | dob                             | 01/01/1996 |
+            | DOB                             | 01/01/1996 |
         Then the service displays the following result
             | Outcome                    | Passed                                                |
             | Total funds required       | £2,279.50                                             |
@@ -96,6 +96,6 @@ Feature: Financial Status core use case scenarios
             | Student type               | Tier 4 (General) student (doctorate extension scheme) |
             | Sort code                  | 22-22-23                                              |
             | Account number             | 88888889                                              |
-            | dob                        | 01/01/1996                                            |
+            | DOB                        | 01/01/1996                                            |
 
 
