@@ -3,22 +3,17 @@ package steps
 import cucumber.api.DataTable
 import cucumber.api.java.Before
 import cucumber.api.java.en.Given
-import cucumber.api.java.en.Then
 import cucumber.api.java.en.When
 import net.thucydides.core.annotations.Managed
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
-
-import static java.util.concurrent.TimeUnit.SECONDS
-import static steps.Utils.verifyHealthChecks
-
 /**
  * @Author Home Office Digital
  */
 class FinancialStatusSteps {
 
     def fsUiRoot = "http://localhost:8001"
-
+   // def fsUiRoot = "http://mitchell-Inspiron-15-3552:8001"
     def delay = 500
 
     @Managed
@@ -46,19 +41,24 @@ class FinancialStatusSteps {
     }
 
 
-    def sortCodeParts = ["First", "Second", "Third"]
+    def sortCodeParts = ["Part1", "Part2", "Part3"]
     def sortCodeDelimiter = "-"
 
     def dateParts = ["Day", "Month", "Year"]
     def dateDelimiter = "/"
 
     def inLondonRadio = new Utils.RadioButtonConfig()
-            .withOption('yes', 'inLondon-1')
-            .withOption('no', 'inLondon-2')
+            .withOption('yes', 'inLondon-0')
+            .withOption('no', 'inLondon-1')
 
     def studentTypeRadio = new Utils.RadioButtonConfig()
-            .withOption('non-doctorate', 'studentType-1')
-            .withOption('doctorate', 'studentType-2')
+        .withOption('non-doctorate', 'student-type-0')
+        .withOption('doctorate', 'student-type-1')
+        .withOption('pgdd', 'student-type-2')
+        .withOption('sso', 'student-type-3')
+
+          //  .withOption('non-doctorate', 'student-type-1')
+            //.withOption('doctorate', 'student-type-2')
 
     def studentType
 
@@ -89,6 +89,7 @@ class FinancialStatusSteps {
 
         sleep(delay)
         driver.findElement(By.className("button")).click()
+        driver.findElement(By.className("button")).getText().equals()
     }
 
     def chooseAndSubmitStudentType(String type) {
