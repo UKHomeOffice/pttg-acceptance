@@ -22,7 +22,7 @@ Feature: Financial Status core use case scenarios
             | Course dates checked            | 30/05/2016 to 30/11/2016 |
             | Student type                    | Tier 4 (General) student |
             | In London                       | Yes                      |
-            | Course length                   | 7                        |
+            | Course length                   | 7 (limited to 9)                       |
             | Total tuition fees              | £8,500.00                |
             | Tuition fees already paid       | £0.00                    |
             | Accommodation fees already paid | £0.00                    |
@@ -138,6 +138,7 @@ Feature: Financial Status core use case scenarios
             | Sort Code      | 11-11-11   |
             | Account Number | 11111111   |
             | DOB            | 27/05/1986 |
+
 
 
 
