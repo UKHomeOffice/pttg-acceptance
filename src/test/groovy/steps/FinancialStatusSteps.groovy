@@ -12,8 +12,10 @@ import org.openqa.selenium.WebDriver
  */
 class FinancialStatusSteps {
 
-    def fsUiRoot = "http://localhost:8001"
+   // def fsUiRoot = "http://localhost:8001"
    // def fsUiRoot = "http://mitchell-Inspiron-15-3552:8001"
+    def fsUiRoot = "https://pttg-fs-ui-dev.notprod.homeoffice.gov.uk"
+
     def delay = 500
 
     @Managed

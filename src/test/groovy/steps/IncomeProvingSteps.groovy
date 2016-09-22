@@ -16,8 +16,8 @@ import static steps.Utils.verifyHealthChecks
  */
 class IncomeProvingSteps {
 
-    def genericUiRoot = "http://localhost:8002"
-    def familyUiRoot = "http://localhost:8003"
+    def genericUiRoot = "https://pttg-ip-gt-ui-dev.notprod.homeoffice.gov.uk"
+    def familyUiRoot = "https://pttg-ip-fm-ui-dev.notprod.homeoffice.gov.uk"
 
     def delay = 500
 
