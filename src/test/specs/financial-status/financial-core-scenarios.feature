@@ -1,7 +1,13 @@
 Feature: Financial Status core use case scenarios
 
-    Scenario: Non-doctorate, in London, insufficient funds
+    Background:
         Given caseworker is using the financial status service ui
+        Given the caseworker has logged into key cloak using the following
+            | User name | mitchell |
+            | Password  | password |
+
+    Scenario: Non-doctorate, in London, insufficient funds
+
         And the non-doctorate student type is chosen
         When the financial status check is performed with
             | End date                        | 30/05/2016 |
@@ -22,16 +28,17 @@ Feature: Financial Status core use case scenarios
             | Course dates checked            | 30/05/2016 to 30/11/2016 |
             | Student type                    | Tier 4 (General) student |
             | In London                       | Yes                      |
-            | Course length                   | 7 (limited to 9)                       |
+            | Course length                   | 7 (limited to 9)         |
             | Total tuition fees              | £8,500.00                |
             | Tuition fees already paid       | £0.00                    |
             | Accommodation fees already paid | £0.00                    |
+            | Account holder name             | Ray Purchase             |
             | Sort code                       | 11-11-11                 |
             | Account number                  | 77777777                 |
             | DOB                             | 01/01/1996               |
 
     Scenario: Non-doctorate, not in London, sufficient funds
-        Given caseworker is using the financial status service ui
+
         And the non-doctorate student type is chosen
         When the financial status check is performed with
             | End date                        | 30/05/2016 |
@@ -52,10 +59,11 @@ Feature: Financial Status core use case scenarios
             | Course dates checked       | 30/05/2016 to 28/02/2017 |
             | Sort code                  | 44-44-44                 |
             | Account number             | 13131313                 |
+            | Account holder name        | Ray Purchase             |
             | DOB                        | 01/01/1996               |
 
     Scenario: Doctorate, in London, insufficient funds
-        Given caseworker is using the financial status service ui
+
         And the doctorate student type is chosen
         When the financial status check is performed with
             | End date                        | 30/05/2016 |
@@ -72,6 +80,7 @@ Feature: Financial Status core use case scenarios
             | Student type                    | Tier 4 (General) student (doctorate extension scheme) |
             | In London                       | Yes                                                   |
             | Accommodation fees already paid | £0.00                                                 |
+            | Account holder name             | Ray Purchase                                          |
             | Sort code                       | 11-11-12                                              |
             | Account number                  | 11111112                                              |
             | DOB                             | 01/01/1996                                            |
@@ -79,7 +88,7 @@ Feature: Financial Status core use case scenarios
     Scenario: Doctorate, in London, sufficient funds
     balance in her account is >= than the Total funds required - at £2279.50)
     She has >= than the threshold for the previous 28 days
-        Given caseworker is using the financial status service ui
+
         And the doctorate student type is chosen
         When the financial status check is performed with
             | End date                        | 30/05/2016 |
@@ -96,11 +105,12 @@ Feature: Financial Status core use case scenarios
             | Student type               | Tier 4 (General) student (doctorate extension scheme) |
             | Sort code                  | 22-22-23                                              |
             | Account number             | 88888889                                              |
+            | Account holder name        | Ray Purchase                                          |
             | DOB                        | 01/01/1996                                            |
 
 
     Scenario: No records exist within the period stated
-        Given caseworker is using the financial status service ui
+
         And the doctorate student type is chosen
         When the financial status check is performed with
             | End date                        | 10/06/2016 |
@@ -120,7 +130,7 @@ Feature: Financial Status core use case scenarios
 
 
     Scenario: Not enough records found
-        Given caseworker is using the financial status service ui
+
         And the doctorate student type is chosen
         #Given the account does not have sufficient records
         When the financial status check is performed with
@@ -132,7 +142,7 @@ Feature: Financial Status core use case scenarios
             | Account number                  | 11111111   |
             | DOB                             | 27/05/1986 |
         Then the service displays the following page content
-            | Page dynamic heading | Not passed |
+            | Page dynamic heading | Not passed                                                          |
             | Page Dynamic detail  | The records for this account does not cover the whole 28 day period |
         And the service displays the following your search data
             | Sort Code      | 11-11-11   |
