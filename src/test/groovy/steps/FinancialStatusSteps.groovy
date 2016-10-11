@@ -12,10 +12,8 @@ import org.openqa.selenium.WebDriver
  */
 class FinancialStatusSteps {
 
-   // def fsUiRoot = "http://localhost:8001"
+    def fsUiRoot = "http://localhost:8001"
    // def fsUiRoot = "http://mitchell-Inspiron-15-3552:8001"
-    def fsUiRoot = "https://pttg-fs-ui-test.notprod.homeoffice.gov.uk"
-
     def delay = 500
 
     @Managed
@@ -117,6 +115,18 @@ class FinancialStatusSteps {
     def the_student_type_is_chosen(String type) {
         studentType = type
         chooseAndSubmitStudentType(type)
+    }
+
+    @Given("^the caseworker has logged into key cloak using the following\$")
+    public void the_caseworker_has_logged_into_key_cloak_using_the_following(DataTable entries)  {
+        Map<String, String> field = entries.asMap(String.class, String.class)
+
+if(driver.currentUrl.contains("auth")) {
+    driver.findElement(By.id("username")).sendKeys(field.get("User name"))
+    driver.findElement(By.id("password")).sendKeys(field.get("Password"))
+    driver.findElement(By.id("kc-login")).click()
+    //println " " + "xxxxxxx"+  entries.raw().get(0).get(1)
+}
     }
 
     @When("^the student type choice is submitted\$")
