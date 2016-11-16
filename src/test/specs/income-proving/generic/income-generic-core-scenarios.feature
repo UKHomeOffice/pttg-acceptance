@@ -2,6 +2,9 @@ Feature: Income Proving - generic tool - core use case scenarios
 
     Background:
         Given caseworker is using the IPS Generic Tool
+        Given the caseworker has logged into key cloak using the following
+            | User name | pttg-test |
+            | Password  | pttg-test |
 
     Scenario: View income details
         When the generic income check is performed with

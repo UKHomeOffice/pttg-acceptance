@@ -3,8 +3,8 @@ Feature: Financial Status core use case scenarios
     Background:
         Given caseworker is using the financial status service ui
         Given the caseworker has logged into key cloak using the following
-            | User name | mitchell |
-            | Password  | password |
+            | User name | pttg-test |
+            | Password  | pttg-test |
 
     Scenario: Non-doctorate, in London, insufficient funds
 
@@ -28,7 +28,7 @@ Feature: Financial Status core use case scenarios
             | Course dates checked            | 30/05/2016 to 30/11/2016 |
             | Student type                    | Tier 4 (General) student |
             | In London                       | Yes                      |
-            | Course length                   | 7 (limited to 9)         |
+            | Course length                   | 7                        |
             | Total tuition fees              | £8,500.00                |
             | Tuition fees already paid       | £0.00                    |
             | Accommodation fees already paid | £0.00                    |
@@ -121,8 +121,8 @@ Feature: Financial Status core use case scenarios
             | Account number                  | 99999999   |
             | DOB                             | 27/05/1986 |
         Then the service displays the following page content
-            | Page dynamic heading | There is no record for the sort code and account number with Barclays                                                           |
-            | Page Dynamic detail  | We couldn't perform the financial requirement check as no information exists for sort code 99-99-99 and account number 99999999 |
+            | Page dynamic heading | Invalid or inaccessible account                                                  |
+            | Page Dynamic detail  | One or more of the following conditions prevented us from accessing the account: |
         And the service displays the following your search data
             | Sort Code      | 99-99-99   |
             | Account Number | 99999999   |

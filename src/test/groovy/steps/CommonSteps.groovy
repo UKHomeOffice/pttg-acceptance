@@ -1,6 +1,7 @@
 package steps
 
 import cucumber.api.DataTable
+import cucumber.api.java.After
 import cucumber.api.java.Before
 import cucumber.api.java.en.Then
 import cucumber.api.java.en.When
@@ -26,8 +27,14 @@ class CommonSteps {
         utils = new Utils(driver)
     }
 
+    @After
+    def tearDown(){
+        driver.manage().deleteAllCookies()
+    }
+
     @Then("^the service displays the following result\$")
     def the_service_displays_the_following_result(DataTable expectedResult) throws Throwable {
+
         utils.assertTextFieldEqualityForTable(expectedResult)
     }
 

@@ -1,6 +1,7 @@
 package steps
 
 import cucumber.api.DataTable
+import cucumber.api.java.After
 import cucumber.api.java.Before
 import cucumber.api.java.en.Given
 import cucumber.api.java.en.When
@@ -12,20 +13,24 @@ import org.openqa.selenium.WebDriver
  */
 class FinancialStatusSteps {
 
-    def fsUiRoot = "http://localhost:8001"
+    //def fsUiRoot = "http://localhost:8001"
    // def fsUiRoot = "http://mitchell-Inspiron-15-3552:8001"
+    def fsUiRoot = "https://pttg-fs-ui-test.notprod.homeoffice.gov.uk/"
     def delay = 500
 
     @Managed
+
+
     WebDriver driver
+   // WebDriver driver = new ChromeDriver()
 
     Utils utils
 
     @Before
     def setUp() {
-
         utils = new Utils(driver)
-
+        driver.sleep(3000)
+        driver.manage().deleteAllCookies()
         utils.pageLocations = [
                 'studentType'       : '#/financial-status-student-type',
                 'doctorateQuery'    : '#/financial-status-query-doctorate',
@@ -38,6 +43,12 @@ class FinancialStatusSteps {
                 'doctorateQuery'    : fsUiRoot + '#/financial-status-query-doctorate',
                 'non-doctorateQuery': fsUiRoot + '#/financial-status-query-non-doctorate'
         ]
+
+    }
+
+    @After
+    def tearDown(){
+        driver.manage().deleteAllCookies()
     }
 
 
@@ -125,6 +136,13 @@ if(driver.currentUrl.contains("auth")) {
     driver.findElement(By.id("username")).sendKeys(field.get("User name"))
     driver.findElement(By.id("password")).sendKeys(field.get("Password"))
     driver.findElement(By.id("kc-login")).click()
+   // driver.findElement(By.className("text")).click()
+   // driver.findElement(By.id("cred_userid_inputtext")).sendKeys(field.get("User name"))
+    //driver.findElement(By.id("cred_password_inputtext")).sendKeys(field.get("Password"))
+  //  driver.sleep(3000)
+   // driver.findElement(By.id("cred_sign_in_button")).click()
+
+
     //println " " + "xxxxxxx"+  entries.raw().get(0).get(1)
 }
     }
