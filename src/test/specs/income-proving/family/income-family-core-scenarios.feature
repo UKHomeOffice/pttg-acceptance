@@ -14,7 +14,7 @@ Feature: Income Proving - family tool - core use case scenarios
             | Dependants              | 4          |
         Then the service displays the following result
             | Page dynamic heading                  | Shelly Patel doesn't meet the Category A requirement |
-            | Category A check failure reason       | they haven't met the required monthly amount.        |
+            | Page dynamic detail                   | they haven't met the required monthly amount.        |
             | Your Search Individual Name           | Shelly Patel                                         |
             | Your Search Dependants                | 4                                                    |
             | Your Search National Insurance Number | SP123456B                                            |
@@ -26,7 +26,7 @@ Feature: Income Proving - family tool - core use case scenarios
             | Application Raised Date | 03/07/2015 |
         Then the service displays the following result
             | Page dynamic heading                  | There is no record for RK123456C with HMRC                                                                                                 |
-            | Page dynamic sub text                 | We couldn't perform the financial requirement check as no income information exists with HMRC for the National Insurance Number RK123456C. |
+            | Page dynamic detail                 | We couldn't perform the financial requirement check as no income information exists with HMRC for the National Insurance Number RK123456C. |
             | Your Search National Insurance Number | RK123456C                                                                                                                                  |
             | Your Search Application Raised Date   | 03/07/2015                                                                                                                                 |
 
@@ -51,8 +51,8 @@ Feature: Income Proving - family tool - core use case scenarios
             | NINO                    | TL123456A  |
             | Application Raised Date | 23/01/2015 |
         Then the service displays the following result
-            | Page heading     | Financial requirement check                                   |
-            | Page sub heading | Does the applicant meet the Category A financial requirement? |
+            | Page static heading     | Financial requirement check                                   |
+            | Page static sub heading | Does the applicant meet the Category A financial requirement? |
 
     Scenario: Page checks for appendix link
         When the family income check is performed with

@@ -77,7 +77,7 @@ class IncomeProvingSteps {
 
             row.eachWithIndex { expected, cellIndex ->
 
-                def cellXpath = ".//table[2]/tbody[$rowIndex+1]/tr/td[$cellIndex+1]"
+                def cellXpath = '//*[@id="results"]/tbody/tr[' + (rowIndex+2) + ']/td[' + (cellIndex+1) + ']'
 
                 def actual = driver.findElement(By.xpath(cellXpath)).getText()
 

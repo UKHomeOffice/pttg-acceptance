@@ -41,8 +41,8 @@ Feature: Income Proving - generic tool - core use case scenarios
             | From Date | 01/04/2015 |
             | To Date   | 20/12/2015 |
         Then the service displays the following message
-            | Page dynamic heading  | There is no record for KR123456C with HMRC                                                                                                 |
-            | Page dynamic sub text | We couldn't perform the financial requirement check as no income information exists with HMRC for the National Insurance Number KR123456C. |
+            | Page dynamic heading | There is no record for KR123456C with HMRC                                                                                                 |
+            | Page dynamic detail  | We couldn't perform the financial requirement check as no income information exists with HMRC for the National Insurance Number KR123456C. |
         And the service displays the following your search data
             | Your Search National Insurance Number | KR123456C  |
             | Your Search From Date                 | 01/04/2015 |
