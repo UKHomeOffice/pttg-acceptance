@@ -1,6 +1,7 @@
 package steps
 
 import cucumber.api.DataTable
+import cucumber.api.java.After
 import cucumber.api.java.Before
 import cucumber.api.java.en.Given
 import cucumber.api.java.en.Then
@@ -9,17 +10,23 @@ import net.thucydides.core.annotations.Managed
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 
-import static steps.Utils.verifyHealthChecks
+import java.time.Duration
+import java.time.Instant
 
 /**
  * @Author Home Office Digital
  */
 class IncomeProvingSteps {
 
+    def fsUiRoot = "http://localhost:8000"
     def genericUiRoot = "https://pttg-ip-gt-ui-test.notprod.homeoffice.gov.uk"
     def familyUiRoot = "https://pttg-ip-fm-ui-test.notprod.homeoffice.gov.uk"
 
     def delay = 500
+
+Instant start;
+
+  Duration gap = Duration.ofMinutes(20);
 
     @Managed
     WebDriver driver
@@ -32,8 +39,15 @@ class IncomeProvingSteps {
     @Before
     def setUp(){
         utils = new Utils(driver)
+        //while(gap < Duration.ofMinutes(20)) {
+          //  driver = true;
+       // }
     }
+@After
+def tearDown(){
+   // Instant later = start.plus(gap);
 
+}
     def submitEntries(Map<String, String> entries) {
         entries.each { k, v ->
             String key = Utils.toCamelCase(k)
@@ -51,6 +65,7 @@ class IncomeProvingSteps {
         driver.findElement(By.className("button")).click()
     }
 
+
     @Given("^caseworker is using the IPS Generic Tool\$")
     def user_is_using_the_IPS_Generic_Tool() throws Throwable {
         driver.get(genericUiRoot);
@@ -58,7 +73,9 @@ class IncomeProvingSteps {
 
     @Given("^caseworker is using the IPS Family Tool\$")
     def user_is_using_the_IPS_family_Tool() throws Throwable {
-        driver.get(familyUiRoot);
+        driver.manage().deleteAllCookies()
+        //driver.get(familyUiRoot);
+        driver.get(fsUiRoot)
     }
 
     @When("^the (?:generic|family) income check is performed with\$")
