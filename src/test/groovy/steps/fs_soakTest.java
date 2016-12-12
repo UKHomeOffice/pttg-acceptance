@@ -122,6 +122,11 @@ public class fs_soakTest {
             if(fileLineCount == count){
                 count = 0;
             }
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         System.out.println(gap.toMillis());
     }
