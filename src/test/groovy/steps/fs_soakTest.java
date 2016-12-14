@@ -62,6 +62,7 @@ public class fs_soakTest {
             driver.manage().deleteAllCookies();
 
             driver.get(fsUiRoot);
+            driver.manage().window().maximize();
 
             System.out.println(fileContent.get(count));
 
