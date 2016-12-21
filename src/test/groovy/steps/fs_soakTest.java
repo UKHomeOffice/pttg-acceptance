@@ -70,7 +70,6 @@ public class fs_soakTest {
                 driver.findElement(By.id("username")).sendKeys("pttg-test");
                 driver.findElement(By.id("password")).sendKeys("pttg-test");
                 driver.findElement(By.id("kc-login")).click();
-
             }
             String[] listContent = fileContent.get(count).split(",");
             String[] sortCodePart = listContent[1].split("-");

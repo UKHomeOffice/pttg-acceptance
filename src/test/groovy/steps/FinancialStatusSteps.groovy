@@ -59,11 +59,11 @@ class FinancialStatusSteps {
     def dateDelimiter = "/"
 
     def inLondonRadio = new Utils.RadioButtonConfig()
-            .withOption('yes', 'inLondon-0')
-            .withOption('no', 'inLondon-1')
+            .withOption('yes', 'inLondon-0-label')
+            .withOption('no', 'inLondon-1-label')
 
     def studentTypeRadio = new Utils.RadioButtonConfig()
-        .withOption('non-doctorate', 'student-type-0')
+        .withOption('non-doctorate', 'student-type-0-label')
         .withOption('doctorate', 'student-type-1')
         .withOption('pgdd', 'student-type-2')
         .withOption('sso', 'student-type-3')
@@ -78,7 +78,7 @@ class FinancialStatusSteps {
         entries.each { k, v ->
             String key = Utils.toCamelCase(k)
 
-            if (key.endsWith("Date") || (key == "dob")) {
+            if (key.endsWith("Date") || key =="dob") {
                 utils.fillOrClearBySplitting(key, v, dateParts, dateDelimiter)
 
             } else if (key == "sortCode") {
@@ -88,10 +88,15 @@ class FinancialStatusSteps {
                 def element = driver.findElement(By.id(key))
 
                 if (key == "inLondon") {
-                    utils.clickRadioButton(inLondonRadio, v)
+                   // utils.clickRadioButton(inLondonRadio, v)
+                    utils.radioButton(v)
 
-                } else if (key == "studentType") {
-                    utils.clickRadioButton(studentTypeRadio, v)
+                }
+               else if(key == "continuationCourse"){
+                  utils.continuationCourse(v)
+                }
+                else if (key == "courseType") {
+                    utils.radioButton(v)
                 } else {
                     Utils.sendKeys(element, v)
                 }
@@ -104,7 +109,8 @@ class FinancialStatusSteps {
     }
 
     def chooseAndSubmitStudentType(String type) {
-        selectStudentType(type)
+        studentType(driver,type)
+        Thread.sleep(1000)
         submitStudentTypeChoice()
     }
 
@@ -113,18 +119,48 @@ class FinancialStatusSteps {
     }
 
     def submitStudentTypeChoice() {
+        Thread.sleep(1000)
         utils.clickButton()
+
+    }
+
+    public void studentType(WebDriver driver,String tableValue){
+        String id = "";
+
+        switch(tableValue){
+            case "non-doctorate":
+                id = "student-type-0-label"
+                break;
+
+                case "doctorate":
+                    id = "student-type-1-label"
+                 break;
+
+                case "pgdd":
+                    id = "student-type-2-label"
+                break;
+
+                case "ssuo":
+                    id = "student-type-3-label"
+                break;
+
+                default:
+                    id = ""
+        }
+        driver.findElement(By.id(id)).click()
     }
 
     @Given("^(?:caseworker|user) is using the financial status service ui\$")
     def user_is_using_the_financial_status_service_ui() throws Throwable {
+        driver.manage().deleteAllCookies()
         driver.get(fsUiRoot)
         utils.assertCurrentPage('studentType')
     }
 
     @Given("^the (.*) student type is chosen\$")
     def the_student_type_is_chosen(String type) {
-        studentType = type
+       //studentType(driver,type,)
+        //studentType = type
         chooseAndSubmitStudentType(type)
     }
 
@@ -132,10 +168,11 @@ class FinancialStatusSteps {
     public void the_caseworker_has_logged_into_key_cloak_using_the_following(DataTable entries)  {
         Map<String, String> field = entries.asMap(String.class, String.class)
 
-if(driver.currentUrl.contains("auth")) {
-    driver.findElement(By.id("username")).sendKeys(field.get("User name"))
-    driver.findElement(By.id("password")).sendKeys(field.get("Password"))
-    driver.findElement(By.id("kc-login")).click()
+        driver.manage().deleteAllCookies()
+        if(driver.currentUrl.contains("auth")) {
+             driver.findElement(By.id("username")).sendKeys(field.get("User name"))
+             driver.findElement(By.id("password")).sendKeys(field.get("Password"))
+             driver.findElement(By.id("kc-login")).click()
    // driver.findElement(By.className("text")).click()
    // driver.findElement(By.id("cred_userid_inputtext")).sendKeys(field.get("User name"))
     //driver.findElement(By.id("cred_password_inputtext")).sendKeys(field.get("Password"))
@@ -178,5 +215,6 @@ if(driver.currentUrl.contains("auth")) {
     def the_financial_status_check_is_performed_with(DataTable arg1) throws Throwable {
         Map<String, String> entries = arg1.asMap(String.class, String.class)
         submitEntries(entries)
+
     }
 }

@@ -10,7 +10,8 @@ Feature: Financial Status core use case scenarios
 
         And the non-doctorate student type is chosen
         When the financial status check is performed with
-            | End date                        | 30/05/2016 |
+            | Application raised date         | 30/06/2016 |
+            | End Date                        | 31/05/2016 |
             | In London                       | Yes        |
             | Course start date               | 30/05/2016 |
             | Course end date                 | 30/11/2016 |
@@ -19,12 +20,14 @@ Feature: Financial Status core use case scenarios
             | Accommodation fees already paid | 0          |
             | Number of dependants            | 0          |
             | Sort code                       | 11-11-11   |
-            | Account number                  | 77777777   |
-            | dob                             | 01/01/1996 |
+            | Account number                  | 11111111   |
+            | Dob                             | 27/07/1981 |
+            | Continuation Course             | No         |
+            | Course type                     | Main       |
         Then the service displays the following result
             | Outcome                         | Not passed               |
             | Total funds required            | £17,355.00               |
-            | Maintenance period checked      | 03/05/2016 to 30/05/2016 |
+            | Maintenance period checked      | 04/05/2016 to 31/05/2016 |
             | Course dates checked            | 30/05/2016 to 30/11/2016 |
             | Student type                    | Tier 4 (General) student |
             | In London                       | Yes                      |
@@ -34,39 +37,44 @@ Feature: Financial Status core use case scenarios
             | Accommodation fees already paid | £0.00                    |
             | Account holder name             | Ray Purchase             |
             | Sort code                       | 11-11-11                 |
-            | Account number                  | 77777777                 |
-            | DOB                             | 01/01/1996               |
+            | Account number                  | 11111111                 |
+            | DOB                             | 27/07/1981               |
 
     Scenario: Non-doctorate, not in London, sufficient funds
 
         And the non-doctorate student type is chosen
         When the financial status check is performed with
-            | End date                        | 30/05/2016 |
-            | In London                       | No         |
-            | Course start date               | 30/05/2016 |
-            | Course end date                 | 28/02/2017 |
-            | Total tuition fees              | 15500.00   |
-            | Number of dependants            | 0          |
-            | Tuition fees already paid       | 100        |
-            | Accommodation fees already paid | 1200       |
-            | Sort code                       | 44-44-44   |
-            | Account number                  | 13131313   |
-            | DOB                             | 01/01/1996 |
+            | Application raised date         | 20/06/2016 |
+            | End Date                        | 30/05/2016 |
+            | In London                       | Yes        |
+            | Course start date               | 08/06/2016 |
+            | Course end date                 | 20/08/2016 |
+            | Total tuition fees              | 9755.50    |
+            | Tuition fees already paid       | 3500       |
+            | Accommodation fees already paid | 250.50     |
+            | Number of dependants            | 1          |
+            | Sort code                       | 11-11-11   |
+            | Account number                  | 77777777   |
+            | Dob                             | 06/04/1989 |
+            | Continuation Course             | Yes        |
+            | Original Course Start Date      | 30/10/2015 |
+            | Course type                     | Main       |
         Then the service displays the following result
             | Outcome                    | Passed                   |
-            | Total funds required       | £23,335.00               |
+            | Total funds required       | £14,025.00               |
             | Maintenance period checked | 03/05/2016 to 30/05/2016 |
-            | Course dates checked       | 30/05/2016 to 28/02/2017 |
-            | Sort code                  | 44-44-44                 |
-            | Account number             | 13131313                 |
+            | Course dates checked       | 08/06/2016 to 20/08/2016 |
+            | Sort code                  | 11-11-11                 |
+            | Account number             | 77777777                 |
             | Account holder name        | Ray Purchase             |
-            | DOB                        | 01/01/1996               |
+            | DOB                        | 06/04/1989               |
 
     Scenario: Doctorate, in London, insufficient funds
 
         And the doctorate student type is chosen
         When the financial status check is performed with
             | End date                        | 30/05/2016 |
+            | Application raised date         | 20/06/2016 |
             | In London                       | Yes        |
             | Accommodation fees already paid | 0          |
             | Number of dependants            | 0          |
@@ -92,6 +100,7 @@ Feature: Financial Status core use case scenarios
         And the doctorate student type is chosen
         When the financial status check is performed with
             | End date                        | 30/05/2016 |
+            | Application raised date         | 20/06/2016 |
             | In London                       | Yes        |
             | Number of dependants            | 0          |
             | Accommodation fees already paid | 250.50     |
@@ -114,6 +123,7 @@ Feature: Financial Status core use case scenarios
         And the doctorate student type is chosen
         When the financial status check is performed with
             | End date                        | 10/06/2016 |
+            | Application raised date         | 20/06/2016 |
             | In London                       | No         |
             | Accommodation fees already paid | 0          |
             | Number of dependants            | 0          |
@@ -135,6 +145,7 @@ Feature: Financial Status core use case scenarios
         #Given the account does not have sufficient records
         When the financial status check is performed with
             | End date                        | 10/06/2016 |
+            | Application raised date         | 20/06/2016 |
             | In London                       | No         |
             | Accommodation fees already paid | 0          |
             | Number of dependants            | 0          |

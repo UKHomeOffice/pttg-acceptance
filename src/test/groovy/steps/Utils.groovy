@@ -75,6 +75,35 @@ class Utils {
         }
     }
 
+   public void radioButton(String key){
+       switch(key){
+           case "Yes":
+               driver.findElement(By.id("inLondon-0-label")).click()
+               break;
+
+           case "No":
+               driver.findElement(By.id("inLondon-1-label")).click()
+               break;
+
+           case "Main":
+               driver.findElement(By.id("courseType-1-label")).click()
+               break;
+
+           case "Pre-sessional":
+               driver.findElement(By.id("courseType-0-label")).click()
+               break;
+       }
+   }
+
+    public void continuationCourse(String answer){
+    if(answer == "No"){
+        driver.findElement(By.id("continuationCourse-1-label")).click()
+    }
+        if(answer == "Yes"){
+            driver.findElement(By.id("continuationCourse-0-label")).click()
+        }
+    }
+
     def fillOrClearBySplitting( String key, String input, List<String> partNames, String delimiter) {
 
         if (input != null && input.length() != 0) {
