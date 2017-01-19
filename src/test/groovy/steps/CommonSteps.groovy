@@ -6,6 +6,7 @@ import cucumber.api.java.Before
 import cucumber.api.java.en.Then
 import cucumber.api.java.en.When
 import net.thucydides.core.annotations.Managed
+import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 
 import static java.util.concurrent.TimeUnit.SECONDS
@@ -31,11 +32,51 @@ class CommonSteps {
     def tearDown(){
         driver.manage().deleteAllCookies()
     }
+    def static toCamelCase(String s) {
+        if (s.isEmpty()) return ""
+        def words = s.tokenize(" ")*.toLowerCase()*.capitalize().join("")
+        words[0].toLowerCase() + words.substring(1)
+    }
 
     @Then("^the service displays the following result\$")
     def the_service_displays_the_following_result(DataTable expectedResult) throws Throwable {
+        Map<String,String> entries = expectedResult.asMap(String.class,String.class)
 
-        utils.assertTextFieldEqualityForTable(expectedResult)
+    utils.assertTextFieldEqualityForTable(expectedResult)
+        assert driver.getCurrentUrl().contains("result")
+
+
+        ArrayList<String> scenarioTable = new ArrayList<>()
+        String[] resultTable = entries.keySet()
+
+        for(String s:resultTable){
+            scenarioTable.add(entries.get(s))
+        }
+
+        for (int j = 0; j < resultTable.size(); j++) {
+            assert scenarioTable.contains(driver.findElement(By.id(toCamelCase(resultTable[j]))).getText())
+        }
+
+
+        int numRows = driver.findElements(By.xpath('//*[@id="resultsTable"]/tbody/tr')).size()
+        int yourSearchRows = driver.findElements(By.xpath('//*[@id="yourSearchTable"]/tbody/tr')).size()
+
+        for(int i=1; i <= numRows; i++) {
+            if (driver.findElement(By.id("resultTimestamp")).getText() != driver.findElement(By.xpath('//*[@id="resultsTable"]/tbody/tr[' + i + ']/td')).getText()) {
+                if (driver.findElement(By.xpath('//*[@id="resultsTable"]/tbody/tr[' + i + ']/td')).getText() == null) {
+                    break;
+                }
+                assert scenarioTable.contains(driver.findElement(By.xpath('//*[@id="resultsTable"]/tbody/tr[' + i + ']/td')).getText())
+            }
+        }
+
+        for(int j=1; j <= yourSearchRows; j++){
+            if (driver.findElement(By.xpath('//*[@id="yourSearchTable"]/tbody/tr[' + j + ']/td')).getText() == null) {
+                break;
+            }
+            assert scenarioTable.contains(driver.findElement(By.xpath('//*[@id="yourSearchTable"]/tbody/tr[' + j + ']/td')).getText())
+        }
+
     }
 
     @Then("^the service displays the following your search data\$")

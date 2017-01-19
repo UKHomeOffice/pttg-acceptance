@@ -128,20 +128,20 @@ class FinancialStatusSteps {
         String id = "";
 
         switch(tableValue){
-            case "non-doctorate":
-                id = "student-type-0-label"
+            case "general-student":
+                id = "applicant-type-nondoctorate-label"
                 break;
 
-                case "doctorate":
-                    id = "student-type-1-label"
+                case "DES":
+                    id = "applicant-type-doctorate-label"
                  break;
 
                 case "pgdd":
-                    id = "student-type-2-label"
+                    id = "applicant-type-pgdd-label"
                 break;
 
                 case "ssuo":
-                    id = "student-type-3-label"
+                    id = "applicant-type-sso-label"
                 break;
 
                 default:
@@ -153,14 +153,16 @@ class FinancialStatusSteps {
     @Given("^(?:caseworker|user) is using the financial status service ui\$")
     def user_is_using_the_financial_status_service_ui() throws Throwable {
         driver.manage().deleteAllCookies()
+        driver.navigate().refresh();
+        driver.manage().window().maximize()
         driver.get(fsUiRoot)
         utils.assertCurrentPage('studentType')
     }
 
     @Given("^the (.*) student type is chosen\$")
     def the_student_type_is_chosen(String type) {
-       //studentType(driver,type,)
-        //studentType = type
+       studentType(driver,type,)
+        studentType = type
         chooseAndSubmitStudentType(type)
     }
 
@@ -214,6 +216,7 @@ class FinancialStatusSteps {
     @When("^the financial status check is performed with\$")
     def the_financial_status_check_is_performed_with(DataTable arg1) throws Throwable {
         Map<String, String> entries = arg1.asMap(String.class, String.class)
+
         submitEntries(entries)
 
     }

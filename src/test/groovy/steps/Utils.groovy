@@ -78,29 +78,29 @@ class Utils {
    public void radioButton(String key){
        switch(key){
            case "Yes":
-               driver.findElement(By.id("inLondon-0-label")).click()
+               driver.findElement(By.id("inLondon-yes-label")).click()
                break;
 
            case "No":
-               driver.findElement(By.id("inLondon-1-label")).click()
+               driver.findElement(By.id("inLondon-no-label")).click()
                break;
 
            case "Main":
-               driver.findElement(By.id("courseType-1-label")).click()
+               driver.findElement(By.id("courseType-main-label")).click()
                break;
 
            case "Pre-sessional":
-               driver.findElement(By.id("courseType-0-label")).click()
+               driver.findElement(By.id("courseType-pre-sessional-label")).click()
                break;
        }
    }
 
     public void continuationCourse(String answer){
     if(answer == "No"){
-        driver.findElement(By.id("continuationCourse-1-label")).click()
+        driver.findElement(By.id("continuationCourse-no-label")).click()
     }
         if(answer == "Yes"){
-            driver.findElement(By.id("continuationCourse-0-label")).click()
+            driver.findElement(By.id("continuationCourse-yes-label")).click()
         }
     }
 

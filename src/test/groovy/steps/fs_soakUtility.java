@@ -12,10 +12,9 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by mitchell on 08/12/16.
+ * Created by mitchell on 21/12/16.
  */
-public class fs_soakTest extends Thread {
-
+public class fs_soakUtility extends Thread {
     static String fsUiRoot = "https://pttg-fs-ui-test.notprod.homeoffice.gov.uk/";
 
     static long startTime;
@@ -24,13 +23,12 @@ public class fs_soakTest extends Thread {
     static long currentTime;
     static long totalRunTime;
     static int fileLineCount;
-    static ArrayList<fs_soakTest> threads = new ArrayList<fs_soakTest>();
+
     static String fileName = "fs_data.txt";
     static ArrayList<String> fileContent = new ArrayList<>() ;
     static String line = null;
 
-    public static void main(String[] args) {
-
+    public void sf_ui(){
         int count = 0;
         File fl = new File(fileName);
         try {
@@ -47,7 +45,7 @@ public class fs_soakTest extends Thread {
         }
 
 
-        Duration gap = Duration.ofSeconds(28800);
+        Duration gap = Duration.ofSeconds(1600);
 
         startTime = System.currentTimeMillis();
         totalRunTime = startTime + gap.toMillis();
@@ -77,7 +75,7 @@ public class fs_soakTest extends Thread {
             if (!(driver.getCurrentUrl().contains("financial-status-student-type"))) {
                 driver.quit();
             }
-           else if(driver.getCurrentUrl().contains("financial-status-student-type")) {
+            else if(driver.getCurrentUrl().contains("financial-status-student-type")) {
                 String[] listContent = fileContent.get(count).split(",");
                 String[] sortCodePart = listContent[1].split("-");
                 driver.findElement(By.id("student-type-0-label")).click();
@@ -141,9 +139,8 @@ public class fs_soakTest extends Thread {
             }
         }
 
-        System.out.println(gap.toMillis());
 
-       }
     }
 
 
+}
