@@ -98,21 +98,25 @@ Feature: Financial Status core use case scenarios
             | Application raised date         | 20/06/2016 |
             | In London                       | Yes        |
             | Accommodation fees already paid | 0          |
-            | Number of dependants            | 0          |
+            | Dependants                      | 0          |
             | Sort code                       | 11-11-12   |
             | Account number                  | 11111112   |
-            | DOB                             | 01/01/1996 |
+            | Dob                             | 01/01/1996 |
         Then the service displays the following result
             | Outcome                         | Not passed                                            |
+            | Application raised date         | 20/06/2016                                            |
             | Total funds required            | £2,530.00                                             |
             | Maintenance period checked      | 03/05/2016 to 30/05/2016                              |
-            | Student type                    | Tier 4 (General) student (doctorate extension scheme) |
+            | Dependants                      | 0                                                     |
+            | Applicant type                  | Tier 4 (General) student (doctorate extension scheme) |
+            | Lowest balance                  | £2,529.00 on 30/05/2016                               |
             | In London                       | Yes                                                   |
             | Accommodation fees already paid | £0.00                                                 |
             | Account holder name             | Ray Purchase                                          |
             | Sort code                       | 11-11-12                                              |
             | Account number                  | 11111112                                              |
             | DOB                             | 01/01/1996                                            |
+
 
     Scenario: Doctorate, in London, sufficient funds
     balance in her account is >= than the Total funds required - at £2279.50)
@@ -122,21 +126,26 @@ Feature: Financial Status core use case scenarios
         When the financial status check is performed with
             | End date                        | 30/05/2016 |
             | Application raised date         | 20/06/2016 |
+            | Dob                             | 01/01/1996 |
             | In London                       | Yes        |
-            | Number of dependants            | 0          |
+            | Dependants                      | 0          |
             | Accommodation fees already paid | 250.50     |
             | Sort code                       | 22-22-23   |
             | Account number                  | 88888889   |
-            | DOB                             | 01/01/1996 |
+            | Dob                             | 01/01/1996 |
         Then the service displays the following result
-            | Outcome                    | Passed                                                |
-            | Total funds required       | £2,279.50                                             |
-            | Maintenance period checked | 03/05/2016 to 30/05/2016                              |
-            | Student type               | Tier 4 (General) student (doctorate extension scheme) |
-            | Sort code                  | 22-22-23                                              |
-            | Account number             | 88888889                                              |
-            | Account holder name        | Ray Purchase                                          |
-            | DOB                        | 01/01/1996                                            |
+            | Outcome                         | Passed                                                |
+            | Application raised date         | 20/06/2016                                            |
+            | Total funds required            | £2,279.50                                             |
+            | Maintenance period checked      | 03/05/2016 to 30/05/2016                              |
+            | Accommodation fees already paid | £250.50                                               |
+            | In London                       | Yes                                                   |
+            | Applicant type                  | Tier 4 (General) student (doctorate extension scheme) |
+            | Dependants                      | 0                                                     |
+            | Sort code                       | 22-22-23                                              |
+            | Account number                  | 88888889                                              |
+            | Account holder name             | Ray Purchase                                          |
+            | DOB                             | 01/01/1996                                            |
 
 
     Scenario: No records exist within the period stated
@@ -147,10 +156,10 @@ Feature: Financial Status core use case scenarios
             | Application raised date         | 20/06/2016 |
             | In London                       | No         |
             | Accommodation fees already paid | 0          |
-            | Number of dependants            | 0          |
+            | Dependants                      | 0          |
             | Sort code                       | 99-99-99   |
             | Account number                  | 99999999   |
-            | DOB                             | 27/05/1986 |
+            | Dob                             | 27/05/1986 |
         Then the service displays the following page content
             | Page dynamic heading | Invalid or inaccessible account                                                  |
             | Page Dynamic detail  | One or more of the following conditions prevented us from accessing the account: |
@@ -169,10 +178,10 @@ Feature: Financial Status core use case scenarios
             | Application raised date         | 20/06/2016 |
             | In London                       | No         |
             | Accommodation fees already paid | 0          |
-            | Number of dependants            | 0          |
+            | Dependants                      | 0          |
             | Sort code                       | 11-11-11   |
             | Account number                  | 11111111   |
-            | DOB                             | 27/05/1986 |
+            | Dob                             | 27/05/1986 |
         Then the service displays the following page content
             | Page dynamic heading | Not passed                                                          |
             | Page Dynamic detail  | The records for this account does not cover the whole 28 day period |
@@ -181,6 +190,55 @@ Feature: Financial Status core use case scenarios
             | Account Number | 11111111   |
             | DOB            | 27/05/1986 |
 
+
+    Scenario: Rob is a Tier 5 (Temporary) and has insufficient funds
+        And the t2main student type is chosen
+        When the financial status check is performed with
+            | Dependants              | 1          |
+            | Application raised date | 03/06/2016 |
+            | End date                | 01/06/2016 |
+            | Sort code               | 01-07-16   |
+            | Account number          | 00040000   |
+            | DOB                     | 25/03/1987 |
+        Then the service displays the following result
+            | Outcome                    | Not passed                                 |
+            | Application raised date    | 03/06/2016                                 |
+            | Applicant type             | Main applicant (with & without dependants) |
+            | Account holder name        | Ray Purchase                               |
+            | Total funds required       | £1,575.00                                  |
+            | Lowest Balance             | £1,574.99 on 11/05/2016                    |
+            | Maintenance period checked | 04/03/2016 to 01/06/2016                   |
+            | Dependants                 | 1                                          |
+            | Sort code                  | 01-07-16                                   |
+            | Account number             | 00040000                                   |
+            | DOB                        | 25/03/1987                                 |
+
+
+    #Scenario: Caseworker is using the calc ui.
+  #      Given caseworker is using the financial status service calc
+   #     And the general-student student type is chosen
+    #    When the financial status check is performed with
+    #        | Application raised date         | 02/05/2016 |
+    #        | End Date                        | 01/05/2016 |
+    #        | Dependants                      | 0          |
+    #        | In London                       | No         |
+    #        | Course Start Date               | 30/05/2016 |
+    #        | Course End Date                 | 29/07/2016 |
+    #        | Total tuition fees              | 3000       |
+    #        | Tuition fees already paid       | 2000       |
+    #        | Accommodation fees already paid | 100        |
+    #        | Continuation course             | No         |
+    #        | Course type                     | Main       |
+    #    Then the service displays the following result
+    #        | Application raised date         | 02/05/2016 |
+    #        | End Date                        | 01/05/2016 |
+    #        | Dependants                      | 0          |
+    #        | In London                       | No         |
+    #        | Course Start Date               | 30/05/2016 |
+    #        | Course End Date                 | 29/07/2016 |
+    #        | Total tuition fees              | 3000       |
+    #        | Tuition fees already paid       | 2000       |
+    #        | Accommodation fees already paid | 100        |
 
 
 

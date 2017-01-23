@@ -35,13 +35,15 @@ class FinancialStatusSteps {
                 'studentType'       : '#/financial-status-student-type',
                 'doctorateQuery'    : '#/financial-status-query-doctorate',
                 'non-doctorateQuery': '#/financial-status-query-non-doctorate',
-                'accountNotFound'   : '#/financial-status-no-record'
+                'accountNotFound'   : '#/financial-status-no-record',
+                'calc'       : '#/financial-status-student-type-calc'
         ]
 
         utils.pageUrls = [
                 'studentType'       : fsUiRoot,
                 'doctorateQuery'    : fsUiRoot + '#/financial-status-query-doctorate',
-                'non-doctorateQuery': fsUiRoot + '#/financial-status-query-non-doctorate'
+                'non-doctorateQuery': fsUiRoot + '#/financial-status-query-non-doctorate',
+                'calc': fsUiRoot + '#/financial-status-calc'
         ]
 
     }
@@ -143,6 +145,9 @@ class FinancialStatusSteps {
                 case "ssuo":
                     id = "applicant-type-sso-label"
                 break;
+            case "t2main":
+                id = "applicant-type-t2main-label"
+                break;
 
                 default:
                     id = ""
@@ -158,6 +163,22 @@ class FinancialStatusSteps {
         driver.get(fsUiRoot)
         utils.assertCurrentPage('studentType')
     }
+
+    @Given("^caseworker is using the financial status service calc\$")
+    public void caseworker_is_using_the_financial_status_service_calc()  {
+
+        driver.get(driver.currentUrl + "-calc")
+        utils.assertCurrentPage('calc')
+    }
+
+    @Given("^caseworker is using the financial status service calculator\$")
+    public void caseworker_is_using_the_financial_status_service_calculator()  {
+        driver.manage().deleteAllCookies()
+        driver.navigate().refresh();
+        driver.manage().window().maximize()
+        driver.get("https://pttg-fs-ui-test.notprod.homeoffice.gov.uk/#!/financial-status-calc")
+    }
+
 
     @Given("^the (.*) student type is chosen\$")
     def the_student_type_is_chosen(String type) {
