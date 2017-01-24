@@ -166,19 +166,9 @@ class FinancialStatusSteps {
 
     @Given("^caseworker is using the financial status service calc\$")
     public void caseworker_is_using_the_financial_status_service_calc()  {
-
         driver.get(driver.currentUrl + "-calc")
         utils.assertCurrentPage('calc')
     }
-
-    @Given("^caseworker is using the financial status service calculator\$")
-    public void caseworker_is_using_the_financial_status_service_calculator()  {
-        driver.manage().deleteAllCookies()
-        driver.navigate().refresh();
-        driver.manage().window().maximize()
-        driver.get("https://pttg-fs-ui-test.notprod.homeoffice.gov.uk/#!/financial-status-calc")
-    }
-
 
     @Given("^the (.*) student type is chosen\$")
     def the_student_type_is_chosen(String type) {

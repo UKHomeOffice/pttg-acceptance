@@ -192,6 +192,7 @@ Feature: Financial Status core use case scenarios
 
 
     Scenario: Rob is a Tier 5 (Temporary) and has insufficient funds
+
         And the t2main student type is chosen
         When the financial status check is performed with
             | Dependants              | 1          |
@@ -214,31 +215,35 @@ Feature: Financial Status core use case scenarios
             | DOB                        | 25/03/1987                                 |
 
 
-    #Scenario: Caseworker is using the calc ui.
-  #      Given caseworker is using the financial status service calc
-   #     And the general-student student type is chosen
-    #    When the financial status check is performed with
-    #        | Application raised date         | 02/05/2016 |
-    #        | End Date                        | 01/05/2016 |
-    #        | Dependants                      | 0          |
-    #        | In London                       | No         |
-    #        | Course Start Date               | 30/05/2016 |
-    #        | Course End Date                 | 29/07/2016 |
-    #        | Total tuition fees              | 3000       |
-    #        | Tuition fees already paid       | 2000       |
-    #        | Accommodation fees already paid | 100        |
-    #        | Continuation course             | No         |
-    #        | Course type                     | Main       |
-    #    Then the service displays the following result
-    #        | Application raised date         | 02/05/2016 |
-    #        | End Date                        | 01/05/2016 |
-    #        | Dependants                      | 0          |
-    #        | In London                       | No         |
-    #        | Course Start Date               | 30/05/2016 |
-    #        | Course End Date                 | 29/07/2016 |
-    #        | Total tuition fees              | 3000       |
-    #        | Tuition fees already paid       | 2000       |
-    #        | Accommodation fees already paid | 100        |
+    Scenario: Caseworker is using the calc ui.
+
+        Given caseworker is using the financial status service calc
+        And the general-student student type is chosen
+        When the financial status check is performed with
+            | Application raised date         | 02/05/2016 |
+            | End Date                        | 01/05/2016 |
+            | Dependants                      | 0          |
+            | In London                       | No         |
+            | Course Start Date               | 30/05/2016 |
+            | Course End Date                 | 29/07/2016 |
+            | Total tuition fees              | 3000       |
+            | Tuition fees already paid       | 2000       |
+            | Accommodation fees already paid | 100        |
+            | Continuation course             | No         |
+            | Course type                     | Main       |
+        Then the service displays the following result
+            | Application raised date         | 02/05/2016               |
+            | Total funds required            | £2,930.00                |
+            | Course length                   | 2                        |
+            | Estimated leave end date        | 05/08/2016               |
+            | Dependants                      | 0                        |
+            | In London                       | No                       |
+            | Total tuition fees              | £3,000.00                |
+            | Tuition fees already paid       | £2,000.00                |
+            | Course type                     | Main                     |
+            | Course dates checked            | 30/05/2016 to 29/07/2016 |
+            | Applicant type                  | Tier 4 (General) student |
+            | Accommodation fees already paid | £100.00                  |
 
 
 
