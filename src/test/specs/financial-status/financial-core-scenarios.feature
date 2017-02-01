@@ -28,7 +28,7 @@ Feature: Financial Status core use case scenarios
             | Outcome                         | Not passed               |
             | Application raised date         | 30/06/2016               |
             | Accommodation fees already paid | £0.00                    |
-            | Applicant type                  | Tier 4 (General) student |
+            | Applicant type                  | Tier 4 (General)         |
             | Total funds required            | £17,355.00               |
             | Maintenance period checked      | 04/05/2016 to 31/05/2016 |
             | Course dates checked            | 30/05/2016 to 30/11/2016 |
@@ -85,7 +85,7 @@ Feature: Financial Status core use case scenarios
             | Estimated Leave End Date        | 20/10/2016               |
             | Entire course length            | 10                       |
             | Application raised date         | 20/06/2016               |
-            | Applicant type                  | Tier 4 (General) student |
+            | Applicant type                  | Tier 4 (General) |
             | Accommodation fees already paid | £250.50                  |
             | Dependants                      | 1                        |
 
@@ -204,7 +204,7 @@ Feature: Financial Status core use case scenarios
         Then the service displays the following result
             | Outcome                    | Not passed                                 |
             | Application raised date    | 03/06/2016                                 |
-            | Applicant type             | Main applicant (with & without dependants) |
+            | Applicant type             | Tier 2 main applicant |
             | Account holder name        | Ray Purchase                               |
             | Total funds required       | £1,575.00                                  |
             | Lowest Balance             | £1,574.99 on 11/05/2016                    |
@@ -242,7 +242,7 @@ Feature: Financial Status core use case scenarios
             | Tuition fees already paid       | £2,000.00                |
             | Course type                     | Main                     |
             | Course dates checked            | 30/05/2016 to 29/07/2016 |
-            | Applicant type                  | Tier 4 (General) student |
+            | Applicant type                  | Tier 4 (General) |
             | Accommodation fees already paid | £100.00                  |
 
 
