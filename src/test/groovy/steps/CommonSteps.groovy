@@ -42,8 +42,9 @@ class CommonSteps {
     def the_service_displays_the_following_result(DataTable expectedResult) throws Throwable {
         Map<String,String> entries = expectedResult.asMap(String.class,String.class)
 
-        Thread.sleep(1500)
+        Thread.sleep(3500)
         assert driver.getCurrentUrl().contains("result")
+        Thread.sleep(3500)
         utils.assertTextFieldEqualityForTable(expectedResult)
        // assert driver.getCurrentUrl().contains("result")
 

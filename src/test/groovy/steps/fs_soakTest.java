@@ -2,7 +2,7 @@ package steps;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -56,7 +56,7 @@ public class fs_soakTest extends Thread {
 
         while (currentTime <= totalRunTime) {
 
-            WebDriver driver = new PhantomJSDriver();
+            WebDriver driver = new ChromeDriver();
             currentTime = startTime + elapsedTime;
             elapsedTime = 0;
 
@@ -71,8 +71,6 @@ public class fs_soakTest extends Thread {
                 driver.findElement(By.id("username")).sendKeys("pttg-test");
                 driver.findElement(By.id("password")).sendKeys("pttg-test");
                 driver.findElement(By.id("kc-login")).click();
-
-
             }
             if (!(driver.getCurrentUrl().contains("financial-status-student-type"))) {
                 driver.quit();

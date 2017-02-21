@@ -97,9 +97,11 @@ class Utils {
 
     public void continuationCourse(String answer){
     if(answer == "No"){
+        Thread.sleep(5000)
         driver.findElement(By.id("continuationCourse-no-label")).click()
     }
         if(answer == "Yes"){
+            Thread.sleep(5000)
             driver.findElement(By.id("continuationCourse-yes-label")).click()
         }
     }
@@ -154,6 +156,7 @@ class Utils {
 
     def assertTextFieldEqualityForTable(DataTable expectedResult) {
         Map<String, String> entries = expectedResult.asMap(String.class, String.class)
+        Thread.sleep(2000)
         assertTextFieldEqualityForMap(entries)
     }
 
