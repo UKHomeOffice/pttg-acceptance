@@ -17,11 +17,11 @@ import java.util.concurrent.TimeUnit
  */
 class FinancialStatusSteps {
 
-    def fsUiRoot = "http://localhost:8001"
+    //def fsUiRoot = "http://localhost:8001"
     // def fsUiRoot = "http://mitchell-Inspiron-15-3552:8001"
     // def fsUiRoot="https://pttg-fs-ui-prod.pttg.homeoffice.gov.uk"
     //def fsUiRoot="https://pttg-fs-ui-preprod.pttg.homeoffice.gov.uk"
-    //def fsUiRoot = "https://pttg-fs-ui-test.notprod.homeoffice.gov.uk/"
+    def fsUiRoot = "https://pttg-fs-ui-test.notprod.homeoffice.gov.uk/"
     //def fsUiRoot = "https://pttg-fs-ui-dev.notprod.homeoffice.gov.uk/"
     def delay = 500
 

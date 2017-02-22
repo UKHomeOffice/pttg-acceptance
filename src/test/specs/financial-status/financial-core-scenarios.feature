@@ -227,36 +227,30 @@ Feature: Financial Status core use case scenarios
 
 
 
-    Scenario: Caseworker is using the calc ui.
+    Scenario: Tier two dependent, sufficient funds
 
-        Given caseworker is using the financial status service calc
-        And the general-student student type is chosen
+        And the Tier2 menu option is selected
+        And Dependent applicant type is selected
+        And the caseworker selects the Yes, check Barclays radio button
+        And consent is sought for the following:
+            | Sort code      | 01-06-16   |
+            | Account number | 00005000   |
+            | DOB            | 27/07/1981 |
         When the financial status check is performed with
-            | Application raised date         | 02/05/2016 |
-            | End Date                        | 01/05/2016 |
-            | Dependants                      | 0          |
-            | In London                       | No         |
-            | Course Start Date               | 30/05/2016 |
-            | Course End Date                 | 29/07/2016 |
-            | Total tuition fees              | 3000       |
-            | Tuition fees already paid       | 2000       |
-            | Accommodation fees already paid | 100        |
-            | Continuation course             | No         |
-            | Course type                     | Main       |
-        Then the service displays the following result
-            | Application raised date         | 02/05/2016               |
-            | Total funds required            | £2,930.00                |
-            | Course length                   | 2                        |
-            | Estimated leave end date        | 05/08/2016               |
-            | Dependants                      | 0                        |
-            | In London                       | No                       |
-            | Total tuition fees              | £3,000.00                |
-            | Tuition fees already paid       | £2,000.00                |
-            | Course type                     | Main                     |
-            | Course dates checked            | 30/05/2016 to 29/07/2016 |
-            | Applicant type                  | Tier 4 (General)         |
-            | Accommodation fees already paid | £100.00                  |
+            | Application raised date | 30/06/2016 |
+            | End Date                | 31/05/2016 |
+            | Dependants              | 0          |
 
+        Then the service displays the following result
+            | Outcome                    | Passed                   |
+            | Application raised date    | 30/06/2016               |
+            | Total funds required       | £630.00                  |
+            | Maintenance period checked | 03/03/2016 to 31/05/2016 |
+            | Account holder name        | Ray Purchase             |
+            | Sort code                  | 01-06-16                 |
+            | Account number             | 00005000                 |
+            | Dependants                 | 0                        |
+            | DOB                        | 27/07/1981               |
 
 
 

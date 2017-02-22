@@ -115,6 +115,7 @@ class CommonSteps {
 
     @Then("^the service displays the following page content\$")
     def the_service_displays_the_following_page_content(DataTable expectedResult) throws Throwable {
+        Thread.sleep(2000)
         utils.assertTextFieldEqualityForTable(expectedResult)
     }
 
