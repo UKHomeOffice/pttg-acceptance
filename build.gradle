@@ -66,6 +66,10 @@ dependencies {
     testCompile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
     testCompile "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
 
+    // https://mvnrepository.com/artifact/com.github.temyers/cucumber-jvm-parallel-plugin
+    compile group: 'com.github.temyers', name: 'cucumber-jvm-parallel-plugin', version: '0.1.0'
+
+
 }
 
 task acceptanceTest(type: Test) {

@@ -11,18 +11,18 @@ import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 
 import java.util.concurrent.TimeUnit
-
 /**
  * @Author Home Office Digital
  */
+
 class FinancialStatusSteps {
 
-    //def fsUiRoot = "http://localhost:8001"
-    // def fsUiRoot = "http://mitchell-Inspiron-15-3552:8001"
+    // def fsUiRoot = "http://localhost:8001"
+    //def fsUiRoot = "http://mitchell-NL8C:8001"
     // def fsUiRoot="https://pttg-fs-ui-prod.pttg.homeoffice.gov.uk"
     //def fsUiRoot="https://pttg-fs-ui-preprod.pttg.homeoffice.gov.uk"
-    def fsUiRoot = "https://pttg-fs-ui-test.notprod.homeoffice.gov.uk/"
-    //def fsUiRoot = "https://pttg-fs-ui-dev.notprod.homeoffice.gov.uk/"
+    //def fsUiRoot = "https://pttg-fs-ui-test.notprod.homeoffice.gov.uk/"
+    def fsUiRoot = "https://pttg-fs-ui-dev.notprod.homeoffice.gov.uk/"
     def delay = 500
 
     @Managed
@@ -138,19 +138,19 @@ class FinancialStatusSteps {
 
         switch (tableValue) {
             case "general-student":
-                id = "applicantType-nondoctorate-label"
+                id = "studentType-general-label"
                 break;
 
             case "DES":
-                id = "applicantType-doctorate-label"
+                id = "studentType-doctorate-label"
                 break;
 
             case "pgdd":
-                id = "applicantType-pgdd-label"
+                id = "studentType-pgdd-label"
                 break;
 
-            case "sso":
-                id = "applicantType-sso-label"
+            case "suso":
+                id = "studentType-suso-label"
                 break;
             case "t2main":
                 id = "applicant-type-t2main-label"

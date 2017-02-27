@@ -18,10 +18,11 @@ import java.time.Instant
  */
 class IncomeProvingSteps {
 
-    def fsUiRoot = "http://localhost:8000"
-    def genericUiRoot = "https://pttg-ip-gt-ui-test.notprod.homeoffice.gov.uk"
-    def familyUiRoot = "https://pttg-ip-fm-ui-test.notprod.homeoffice.gov.uk"
-
+    //def fsUiRoot = "http://localhost:8000"
+    //def genericUiRoot = "https://pttg-ip-gt-ui-test.notprod.homeoffice.gov.uk"
+    def genericUiRoot = "https://pttg-ip-gt-ui-dev.notprod.homeoffice.gov.uk"
+    //def familyUiRoot = "https://pttg-ip-fm-ui-test.notprod.homeoffice.gov.uk"
+    def familyUiRoot = "https://pttg-ip-fm-ui-dev.notprod.homeoffice.gov.uk"
     def delay = 500
 
 Instant start;
@@ -74,8 +75,8 @@ def tearDown(){
     @Given("^caseworker is using the IPS Family Tool\$")
     def user_is_using_the_IPS_family_Tool() throws Throwable {
         driver.manage().deleteAllCookies()
-        //driver.get(familyUiRoot);
-        driver.get(fsUiRoot)
+        driver.get(familyUiRoot);
+        //driver.get(fsUiRoot)
     }
 
     @When("^the (?:generic|family) income check is performed with\$")
