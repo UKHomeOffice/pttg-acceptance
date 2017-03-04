@@ -165,8 +165,19 @@ class Utils {
         entries.each { k, v ->
             String fieldName = toCamelCase(k);
             WebElement element = driver.findElement(By.id(fieldName))
+if(fieldName != "conditionCode") {
+    assert element.getText() == v
+}
+            if(fieldName == "conditionCode") {
+                String[] conCodes = driver.findElement(By.id("conditionCode")).getText().split("\n")
+                String[] field = v.split(',')
 
-            assert element.getText() == v
+                assert conCodes[0].equals(field[0])
+
+                if(field.size()>1) {
+                    assert conCodes[1].equals(field[1])
+                }
+            }
         }
     }
 

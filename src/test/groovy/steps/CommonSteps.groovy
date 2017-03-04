@@ -5,12 +5,11 @@ import cucumber.api.java.After
 import cucumber.api.java.Before
 import cucumber.api.java.en.Then
 import cucumber.api.java.en.When
+import net.serenitybdd.core.annotations.findby.By
 import net.thucydides.core.annotations.Managed
-import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 
 import static java.util.concurrent.TimeUnit.SECONDS
-
 /**
  * @Author Home Office Digital
  */
@@ -38,6 +37,32 @@ class CommonSteps {
         words[0].toLowerCase() + words.substring(1)
     }
 
+    def validateResultSection(DataTable table) {
+        Map<String, String> entries = table.asMap(String.class, String.class)
+
+        ArrayList<String> scenarioTable = new ArrayList<>()
+        ArrayList<String> resultSection = new ArrayList<>()
+        String[] resultTable = entries.keySet()
+
+        for(String s:resultTable){
+            scenarioTable.add(entries.get(s))
+        }
+
+        int ls = driver.findElements(By.xpath('//*[@id="result"]/tbody/tr')).size()
+
+        for (int i = 1; i <= ls; i++) {
+            if (driver.findElement(By.xpath('//*[@id="result"]/tbody/tr[' + i + ']' + '/td')).getAttribute("id") != "responseTime") {
+                resultSection.add(driver.findElement(By.xpath('//*[@id="result"]/tbody/tr[' + i + ']' + '/td')).getText())
+                assert scenarioTable.contains(driver.findElement(By.xpath('//*[@id="result"]/tbody/tr[' + i + ']' + '/td')).getText())
+
+            }
+
+        }
+        assert resultSection.contains(scenarioTable)
+    }
+
+
+
     @Then("^the service displays the following result\$")
     def the_service_displays_the_following_result(DataTable expectedResult) throws Throwable {
         Map<String,String> entries = expectedResult.asMap(String.class,String.class)
@@ -50,35 +75,46 @@ class CommonSteps {
 
 
         ArrayList<String> scenarioTable = new ArrayList<>()
+        ArrayList<String> resultSection = new ArrayList<>()
         String[] resultTable = entries.keySet()
 
         for(String s:resultTable){
             scenarioTable.add(entries.get(s))
         }
 
-        for (int j = 0; j < resultTable.size(); j++) {
-            assert scenarioTable.contains(driver.findElement(By.id(toCamelCase(resultTable[j]))).getText())
+
+      int ls = driver.findElements(By.xpath('//*[@id="result"]/tbody/tr')).size()
+
+try {
+
+    for (int i = 1; i <= ls; i++) {
+        if ((driver.findElement(By.xpath('//*[@id="result"]/tbody/tr[' + i + ']' + '/td')).getAttribute("id") != "responseTime") && (driver.findElement(By.xpath('//*[@id="result"]/tbody/tr[' + i + ']' + '/td')).getAttribute("id") != "conditionCode")) {
+            resultSection.add(driver.findElement(By.xpath('//*[@id="result"]/tbody/tr[' + i + ']' + '/td')).getText())
+            assert scenarioTable.contains(driver.findElement(By.xpath('//*[@id="result"]/tbody/tr[' + i + ']' + '/td')).getText())
+
         }
 
+        if (driver.findElement(By.xpath('//*[@id="result"]/tbody/tr[' + i + ']' + '/td')).getAttribute("id") == "conditionCode") {
+           // resultSection.add(driver.findElement(By.xpath('//*[@id="result"]/tbody/tr[' + i + ']' + '/td')).getText())
+           // assert scenarioTable.contains(driver.findElement(By.xpath('//*[@id="result"]/tbody/tr[' + i + ']' + '/td')).getText())
 
-        int numRows = driver.findElements(By.xpath('//*[@id="resultsTable"]/tbody/tr')).size()
-        int yourSearchRows = driver.findElements(By.xpath('//*[@id="yourSearchTable"]/tbody/tr')).size()
+            String[] conCodes = driver.findElement(By.id("conditionCode")).getText().split("\n")
 
-        for(int i=1; i <= numRows; i++) {
-            if (driver.findElement(By.id("resultTimestamp")).getText() != driver.findElement(By.xpath('//*[@id="resultsTable"]/tbody/tr[' + i + ']/td')).getText()) {
-                if (driver.findElement(By.xpath('//*[@id="resultsTable"]/tbody/tr[' + i + ']/td')).getText() == null) {
-                    break;
-                }
-                assert scenarioTable.contains(driver.findElement(By.xpath('//*[@id="resultsTable"]/tbody/tr[' + i + ']/td')).getText())
+            String[] field = entries.get("Condition codes").split(",")
+
+            assert conCodes[0].equals(field[0])
+
+            if (field.size() > 1) {
+                assert conCodes[1].equals(field[1])
+                assert conCodes[2].equals(field[2])
             }
         }
 
-        for(int j=1; j <= yourSearchRows; j++){
-            if (driver.findElement(By.xpath('//*[@id="yourSearchTable"]/tbody/tr[' + j + ']/td')).getText() == null) {
-                break;
-            }
-            assert scenarioTable.contains(driver.findElement(By.xpath('//*[@id="yourSearchTable"]/tbody/tr[' + j + ']/td')).getText())
-        }
+    }
+}
+catch(Exception ex){
+    ex.printStackTrace()
+}
 
     }
 

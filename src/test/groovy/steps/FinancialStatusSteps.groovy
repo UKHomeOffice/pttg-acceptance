@@ -21,8 +21,8 @@ class FinancialStatusSteps {
     //def fsUiRoot = "http://mitchell-NL8C:8001"
     // def fsUiRoot="https://pttg-fs-ui-prod.pttg.homeoffice.gov.uk"
     //def fsUiRoot="https://pttg-fs-ui-preprod.pttg.homeoffice.gov.uk"
-    //def fsUiRoot = "https://pttg-fs-ui-test.notprod.homeoffice.gov.uk/"
-    def fsUiRoot = "https://pttg-fs-ui-dev.notprod.homeoffice.gov.uk/"
+    def fsUiRoot = "https://pttg-fs-ui-test.notprod.homeoffice.gov.uk/"
+    //def fsUiRoot = "https://pttg-fs-ui-dev.notprod.homeoffice.gov.uk/"
     def delay = 500
 
     @Managed
@@ -90,7 +90,9 @@ class FinancialStatusSteps {
             if (key.endsWith("Date") || key == "dob") {
                 utils.fillOrClearBySplitting(key, v, dateParts, dateDelimiter)
 
-            } else if (key == "sortCode") {
+            }
+
+            else if (key == "sortCode") {
                 utils.fillOrClearBySplitting(key, v, sortCodeParts, sortCodeDelimiter)
 
             } else {
@@ -106,7 +108,14 @@ class FinancialStatusSteps {
                     utils.continuationCourse(v)
                 } else if (key == "courseType") {
                     utils.radioButton(v)
-                } else {
+                }
+                else if(entries.get(k) == "true"){
+                    driver.findElement(By.id("courseInstitution-true-label")).click()
+                }
+                else if(entries.get(k) == "false"){
+                    driver.findElement(By.id("courseInstitution-false-label")).click()
+                }
+                else {
                     Utils.sendKeys(element, v)
                 }
             }
@@ -142,7 +151,7 @@ class FinancialStatusSteps {
                 break;
 
             case "DES":
-                id = "studentType-doctorate-label"
+                id = "studentType-des-label"
                 break;
 
             case "pgdd":
