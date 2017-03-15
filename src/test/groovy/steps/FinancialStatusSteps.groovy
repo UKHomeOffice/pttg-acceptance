@@ -11,6 +11,7 @@ import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 
 import java.util.concurrent.TimeUnit
+
 /**
  * @Author Home Office Digital
  */
@@ -21,8 +22,8 @@ class FinancialStatusSteps {
     //def fsUiRoot = "http://mitchell-NL8C:8001"
     // def fsUiRoot="https://pttg-fs-ui-prod.pttg.homeoffice.gov.uk"
     //def fsUiRoot="https://pttg-fs-ui-preprod.pttg.homeoffice.gov.uk"
-    def fsUiRoot = "https://pttg-fs-ui-test.notprod.homeoffice.gov.uk/"
-    //def fsUiRoot = "https://pttg-fs-ui-dev.notprod.homeoffice.gov.uk/"
+    //def fsUiRoot = "https://pttg-fs-ui-test.notprod.homeoffice.gov.uk/"
+    def fsUiRoot = "https://pttg-fs-ui-dev.notprod.homeoffice.gov.uk/"
     def delay = 500
 
     @Managed
@@ -90,9 +91,7 @@ class FinancialStatusSteps {
             if (key.endsWith("Date") || key == "dob") {
                 utils.fillOrClearBySplitting(key, v, dateParts, dateDelimiter)
 
-            }
-
-            else if (key == "sortCode") {
+            } else if (key == "sortCode") {
                 utils.fillOrClearBySplitting(key, v, sortCodeParts, sortCodeDelimiter)
 
             } else {
@@ -108,14 +107,11 @@ class FinancialStatusSteps {
                     utils.continuationCourse(v)
                 } else if (key == "courseType") {
                     utils.radioButton(v)
-                }
-                else if(entries.get(k) == "true"){
+                } else if (entries.get(k) == "true") {
                     driver.findElement(By.id("courseInstitution-true-label")).click()
-                }
-                else if(entries.get(k) == "false"){
+                } else if (entries.get(k) == "false") {
                     driver.findElement(By.id("courseInstitution-false-label")).click()
-                }
-                else {
+                } else {
                     Utils.sendKeys(element, v)
                 }
             }
@@ -147,19 +143,19 @@ class FinancialStatusSteps {
 
         switch (tableValue) {
             case "general-student":
-                id = "studentType-general-label"
+                id = "general"
                 break;
 
             case "DES":
-                id = "studentType-des-label"
+                id = "des"
                 break;
 
             case "pgdd":
-                id = "studentType-pgdd-label"
+                id = "pgdd"
                 break;
 
             case "suso":
-                id = "studentType-suso-label"
+                id = "suso"
                 break;
             case "t2main":
                 id = "applicant-type-t2main-label"
@@ -190,7 +186,7 @@ class FinancialStatusSteps {
     def the_student_type_is_chosen(String type) {
         studentType(driver, type,)
         studentType = type
-        chooseAndSubmitStudentType(type)
+        //chooseAndSubmitStudentType(type)
     }
 
     @Given("^the caseworker has logged into key cloak using the following\$")
@@ -209,6 +205,27 @@ class FinancialStatusSteps {
             // driver.findElement(By.id("cred_sign_in_button")).click()
 
             //println " " + "xxxxxxx"+  entries.raw().get(0).get(1)
+        }
+    }
+
+    @Given("^the (.*) is clicked\$")
+    public void the_Check_financial_status_is_clicked(String getConsentOrFinancialStatus) {
+        switch (getConsentOrFinancialStatus) {
+            case "Check financial status":
+                driver.findElement(By.id("checkStatus")).click()
+                break;
+            case "Get consent for a financial check":
+                driver.findElement(By.linkText("Get consent for a financial check")).click()
+                break;
+            case "Start new check":
+                driver.findElement(By.linkText("Start new check")).click()
+                break;
+            case "Calculate daily funds required":
+                driver.findElement(By.linkText("Calculate daily funds required")).click()
+                break;
+            default:
+                println "No option selected"
+
         }
     }
 
@@ -251,10 +268,10 @@ class FinancialStatusSteps {
     public void theTierMenuOptionIsSelected(int arg) {
         int xpath
         switch (arg) {
-            case 4:
+            case 2:
                 xpath = 2;
                 break;
-            case 2:
+            case 4:
                 xpath = 1;
                 break;
             case 5:
@@ -263,7 +280,7 @@ class FinancialStatusSteps {
             default:
                 println("Cannot find Tier option");
         }
-
+//*[@id="nav"]/div/ul/li[2]/a
         driver.findElement(By.xpath('//*[@id="nav"]/div/ul/li[' + xpath + ']/a')).click()
     }
 
@@ -271,28 +288,29 @@ class FinancialStatusSteps {
     public void mainApplicantTypeIsSelected(String applicantType) {
         switch (applicantType) {
             case "Main":
-                driver.findElement(By.id("applicantType-main-label")).click()
+                driver.findElement(By.linkText("Main applicant")).click()
                 break;
-            case "Dependent":
-                driver.findElement(By.id("applicantType-dependant-label")).click()
+            case "Dependant":
+                driver.findElement(By.linkText("Dependants only")).click()
+               // driver.findElement(By.id("applicantType-dependant-label")).click()
                 break;
-            case "non-doctorate":
-                driver.findElement(By.id("applicantType-nondoctorate")).click()
+            case "General Student":
+                driver.findElement(By.linkText("General student")).click()
                 break;
-            case "doctorate":
-                driver.findElement(By.id("applicantType-doctorate-label")).click()
+            case "DES":
+                driver.findElement(By.linkText("Doctorate extension scheme")).click()
                 break;
             case "pgdd":
-                driver.findElement(By.id("applicantType-pgdd-label")).click()
+                driver.findElement(By.linkText("Postgraduate doctor or dentist")).click()
                 break;
             case "sso":
-                driver.findElement(By.id("applicantType-sso-label")).click()
+                driver.findElement(By.linkText("Student union sabbatical officer")).click()
                 break;
             default:
                 println("Applicant type not selected")
 
         }
-        driver.findElement(By.className("button")).click()
+       // driver.findElement(By.className("button")).click()
     }
 
     @And("^the caseworker selects the (.*) radio button\$")
@@ -313,7 +331,7 @@ class FinancialStatusSteps {
     }
 
     @And("^consent is sought for the following:\$")
-    public void consentIsSoughtForTheFollowing(DataTable arg)  {
+    public void consentIsSoughtForTheFollowing(DataTable arg) {
         Map<String, String> entries = arg.asMap(String.class, String.class)
 
         submitEntries(entries)
